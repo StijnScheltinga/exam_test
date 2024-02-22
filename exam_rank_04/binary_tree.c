@@ -88,6 +88,29 @@ int	search_value(treenode *root, int value)
 		return (search_value(root->right, value));
 }
 
+int count_nodes(treenode *root)
+{
+	if (root == NULL)
+		return (0);
+	else
+		return (1 + count_nodes(root->left) + count_nodes(root->right));
+}
+
+int	height(treenode *root)
+{
+	if (root == NULL)
+		return (0);
+	else
+	{
+		int heightright = height(root->right);
+		int heightleft = height(root->left);
+		if (heightright > heightleft)
+			return (1 + heightright);
+		else
+			return (1 + heightleft);
+	}
+}
+
 void	print_tree(treenode *root)
 {
 	if (root == NULL)
@@ -106,6 +129,8 @@ int main(int argc, char **argv)
 	if (int_check(argc, argv))
 		return (1);
 	create_tree(&root, argc, argv);
+	printf("N nodes: %d\n", count_nodes(root));
+	printf("max height: %d\n", height(root));
 	// if (search_value(root, 12))
 	// 	printf("number found\n");
 	// print_tree(root);
