@@ -61,7 +61,7 @@ void	insert_node(treenode **rootptr, int value)
 	else if (value < (*rootptr)->value)
 		insert_node(&((*rootptr)->left), value);
 	else if (value > (*rootptr)->value)
-		insert_node(&((*rootptr)->right), value);	
+		insert_node(&((*rootptr)->right), value);
 }
 
 void	create_tree(treenode **root, int argc, char **argv)
@@ -118,8 +118,8 @@ void	print_tree(treenode *root)
 	else
 	{
 		printf("%d\n", root->value);
-		print_tree(root->left);
 		print_tree(root->right);
+		print_tree(root->left);
 	}
 }
 
