@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	add(char *string1, char *string2);
+char    *add(char *string1, char *string2);
 int		ft_strlen(char *string);
+int 	max_length(char *s1, char *s2);
+int		check_neg(char *string);
 
 #endif

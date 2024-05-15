@@ -7,3 +7,45 @@ int ft_strlen(char *string)
 		i++;
 	return i;
 }
+
+int max_length(char *s1, char *s2)
+{
+	//calulate the longest string
+	int s1len = ft_strlen(s1);
+	int s2len = ft_strlen(s2);
+	int maxLen = s1len > s2len ? s1len : s2len;
+	printf("max len: %d\n", maxLen);
+	return maxLen;
+}
+
+int	check_neg(char *str)
+{
+	if (str[0] == '-')
+	{
+		str[0] = '0';
+		return -1;
+	}
+	return 1;
+}
+
+// char *determine_big_number(char *s1, char *s2)
+// {
+// 	int s1len = ft_strlen(s1);
+// 	int s2len = ft_strlen(s2);
+
+// 	if (s1len == s2len)
+// 	{
+// 		for (int i = 0; i < s1len; i++)
+// 		{
+// 			if (s1[i] > s2[i])
+// 				return s1;
+// 			else if (s2[i] > s1[i])
+// 				return s2;	
+// 		}
+// 		return NULL;
+// 	}
+// 	else if (s1len > s2len)
+// 		return s1;
+// 	else
+		
+// }
