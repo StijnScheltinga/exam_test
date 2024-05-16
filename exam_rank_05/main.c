@@ -1,5 +1,22 @@
 #include "inf_add.h"
 
+char *truncate_zero(char *result)
+{
+	char *trim = malloc((ft_strlen(result) - 1) * sizeof(char));
+	int trimindex = 0;
+	for (int i = 1; result[i]; i++)
+		trim[trimindex++] = result[i];
+	free(result);
+	return trim;
+}
+
+/*
+how to subtract numbers:
+num1 = 148292 num2 = -6630982
+
+*/
+
+
 char *add(char *s1, char *s2)
 {
 	int maxLen = max_length(s1, s2);
@@ -17,15 +34,23 @@ char *add(char *s1, char *s2)
 	int carry = 0;
 	int sum = 0;
 	//start at back of both strings and calculate their sum
-	while (!(i < 0))
+	while (i >= 0)
 	{
-
-		
+		//calulate sum of the two characters
+		int digit1 = s1index >= 0 ? s1[s1index] - '0' : 0;
+		int digit2 = s2index >= 0 ? s2[s2index] - '0' : 0;
+		sum = digit1 + digit2 + carry; // sum = digit1 - digit2 - carry
+		carry = sum / 10;
+		sum = sum % 10;
+		result[i] = sum + '0';
 		i--;
 		s1index--;
 		s2index--;
 	}
-
+	if (carry != 0)
+		result[0] = carry + '0';
+	else
+		return truncate_zero(result);
 	return result;
 }
 
@@ -39,13 +64,12 @@ int main(int argc, char **argv)
 	char *string1 = argv[1];
 	char *string2 = argv[2];
 
-	
+	char *result;
 
-	// char *result;
+	result = add(string1, string2);
+	printf("result: %s\n", result);
 
-	// result = add("99999", "99999");
-	// printf("result: %s\n", result);
-
+	free(result);
 	// result = subtract("9999234", "-99999");
 	// printf("result: %s\n", result);
 }
