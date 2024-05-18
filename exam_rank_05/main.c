@@ -66,8 +66,6 @@ char *subtract(char *s1, char *s2)
 	char *result = malloc(sizeof(char) * (maxLen + 2));
 	if (!result)
 		return NULL;
-	else
-		printf("malloced!\n");
 	int i = maxLen + 1;
 	result[i] = '\0';
 	i--;
@@ -76,11 +74,11 @@ char *subtract(char *s1, char *s2)
 	//if number to be subtracted is bigger we should rearrenge the numbers and print a '-' sign at the end
 	int sign = 1;
 
-	printf("before swap, s1: %s, s2: %s\n", s1, s2);
+	// printf("before swap, s1: %s, s2: %s\n", s1, s2);
 
 	if (s2IsBigger(s1, s2))
 	{
-		write(1, "string 2 is bigger\n", 19);
+		// write(1, "string 2 is bigger\n", 19);
 		char *temp = s1;
 		s1 = s2;
 		s2 = temp;
@@ -90,7 +88,7 @@ char *subtract(char *s1, char *s2)
 		sign = -1;
 	}
 
-	printf("after swap, s1: %s, s2: %s\n", s1, s2);
+	// printf("after swap, s1: %s, s2: %s\n", s1, s2);
 	//create index for both strings
 	int s1index = s1len - 1;
 	int s2index = s2len - 1;
@@ -119,6 +117,7 @@ char *subtract(char *s1, char *s2)
 	// return truncate_zero(result);
 	if (sign == -1)
 		write(1, "-", 1);
+	result = trimZeros(result);
 	return result;
 }
 
@@ -144,13 +143,13 @@ int main(int argc, char **argv)
 	}
 	else if (sign1 == '-' && sign2 != '-')
 	{
-		printf("first number is negative\n");
+		// printf("first number is negative\n");
 		result = subtract(string2, &string1[1]);
 		printf("%s\n", result);
 	}
 	else if (sign1 != '-' && sign2 == '-')
 	{
-		printf("second number is negative\n");
+		// printf("second number is negative\n");
 		result = subtract(string1, &string2[1]);
 		printf("%s\n", result);
 	}

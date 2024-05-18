@@ -14,7 +14,7 @@ int max_length(char *s1, char *s2)
 	int s1len = ft_strlen(s1);
 	int s2len = ft_strlen(s2);
 	int maxLen = s1len > s2len ? s1len : s2len;
-	printf("max len: %d\n", maxLen);
+	// printf("max len: %d\n", maxLen);
 	return maxLen;
 }
 
@@ -51,6 +51,30 @@ int	s2IsBigger(char *s1, char *s2)
 	}
 	else
 		return 0;
+}
+
+char *trimZeros(char *result)
+{
+	int zero_n = 0;
+	for (int i = 0; result[i] && result[i] == '0'; i++)
+		zero_n++;
+	int trim_size = ft_strlen(result) - zero_n;
+	// printf("trim size: %d, zero_n: %d\n", trim_size, zero_n);
+	char *trim = malloc(sizeof(char) * (trim_size + 1));
+	if (!trim)
+	{
+		printf("memory allocation failed\n");
+		return NULL;
+	}
+	trim[trim_size] = '\0';
+	for (int j = 0; j < trim_size; j++)
+	{
+		// printf("trim[j]: %c, result[j + zero_n]: %c\n", trim[j], result[j + zero_n]);
+		trim[j] = result[j + zero_n];
+	}
+	free(result);
+	// printf("trim: |%s|\n", trim);
+	return trim;
 }
 
 // char *determine_big_number(char *s1, char *s2)
