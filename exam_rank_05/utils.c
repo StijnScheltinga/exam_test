@@ -28,6 +28,31 @@ int	check_neg(char *str)
 	return 1;
 }
 
+//returns 1 if s2 is bigger else if s1 is bigger or equal to s2 it returns 0
+int	s2IsBigger(char *s1, char *s2)
+{
+	int s1len = ft_strlen(s1);
+	int s2len = ft_strlen(s2);
+
+	if (s2len > s1len)
+		return 1;
+	else if (s1len == s2len)
+	{
+		int s1index = s1len -1;
+		int s2index = s2len -1;
+		while (s1index >= 0 && s2index >= 0)
+		{
+			if (s2[s2index] - '0' > s1[s1index] - '0')
+				return 1;
+			s1index--;
+			s2index--;
+		}
+		return 0;
+	}
+	else
+		return 0;
+}
+
 // char *determine_big_number(char *s1, char *s2)
 // {
 // 	int s1len = ft_strlen(s1);
