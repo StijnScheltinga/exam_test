@@ -26,7 +26,7 @@ char	*multiply(char *num1, char *num2)
 	int	num1len = ft_strlen(num1);
 	int	num2len = ft_strlen(num2);
 	int	resultlen = num1len + num2len;
-	int	*result = malloc(sizeof(int) * (resultlen + 1));
+	int	*result = malloc(sizeof(int) * resultlen);
 
 	//initialize result array to 0
 	for (int i = 0; i != resultlen; i++)
@@ -37,10 +37,22 @@ char	*multiply(char *num1, char *num2)
 
 	
 	for (int i = 0; i < num1len; i++)
+	{
 		for (int j = 0; j < num2len; j++)
 		{
-
+			result[i + j] += (num1[i] - '0') * (num2[j] - '0');
+			if (result[i + j] >= 10)
+			{
+				result[i + j + 1] += result[i + j] / 10;
+				result[i + j] %= 10;
+			}
 		}
+	}
+	for (int i = resultlen; i >= 0; i--)
+		printf("%d", result[i]);
+	// int i = resultlen - 1;
+	// while (i >= 0 && )
+	return NULL;
 }
 
 int	main(int argc, char **argv)
