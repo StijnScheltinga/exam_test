@@ -70,22 +70,35 @@ void printmap(char **map, int max_lines)
 	}
 }
 
-void floodfill(char **map, int max_lines, int y, int x)
+int	my_strlen(char *str)
 {
-	//check out of bounds
-	if (y >= max_lines || !map[y][x])
+	int i = 0;
+	while (str[i])
+		i++;
+	return i;
+}
+
+void floodfill(char **map, int max_lines, int y, int x, int num)
+{
+	//check out of bounds or no X
+	if (y < 0 || y >= max_lines || x < 0 || x >= my_strlen(map[y]))
 		return ;
 
-	if ()
+	//only set if has not been set yet
+	if (map[y][x] == 'X')
+		map[y][x] = num + '0';
+	else
+		return ;
 
-	floodfill(map, max_lines, y, x + 1);
-	floodfill(map, max_lines, y, x - 1);
-	floodfill(map, max_lines, y + 1, x);
-	floodfill(map, max_lines, y - 1, x);
+	floodfill(map, max_lines, y - 1, x, num);
+	floodfill(map, max_lines, y, x + 1, num);
+	floodfill(map, max_lines, y, x - 1, num);
+	floodfill(map, max_lines, y + 1, x, num);
 }
 
 void find_islands(char **map, int max_lines)
 {
+	int num = 0;
 	//loop through whole map, start floodfill when X is found
 	for (int y = 0; y != max_lines; y++)
 	{
@@ -93,11 +106,10 @@ void find_islands(char **map, int max_lines)
 		{
 			if (map[y][x] == 'X')
 			{
-				floodfill(map, max_lines, y, x);
+				floodfill(map, max_lines, y, x, num);
+				num++;
 			}
-			x++;
 		}
-		y++;
 	}
 }
 
@@ -126,6 +138,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-	printmap(map, max_lines);
+	// printmap(map, max_lines);
 	find_islands(map, max_lines);
+	printmap(map, max_lines);
 }
